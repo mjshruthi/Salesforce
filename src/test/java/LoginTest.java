@@ -2,6 +2,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertTrue;
 
 public class LoginTest {
+
     @Test
     public void testLoginErrorMessage_TC01() throws InterruptedException{
         LoginPage loginPage = new LoginPage();
@@ -10,6 +11,7 @@ public class LoginTest {
         loginPage.clickLoginButton();
         assertTrue(loginPage.getLoginErrorMessage().equalsIgnoreCase("Please enter your password."),
                 "Error on screen did not match expected message.");
+        loginPage.quit();
     }
 
     @Test
@@ -18,6 +20,7 @@ public class LoginTest {
         HomePage homePage = loginPage.login();
         // code for wait.
         assertTrue(homePage.isUserNavButtonVisible());
+        loginPage.quit();
     }
 
     @Test
