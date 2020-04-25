@@ -3,7 +3,7 @@ import static org.testng.Assert.assertTrue;
 
 public class LoginTest {
     @Test
-    public void testLoginErrorMessage() throws InterruptedException{
+    public void testLoginErrorMessage_TC01() throws InterruptedException{
         LoginPage loginPage = new LoginPage();
         loginPage.setUserName("mjshruthi");
         loginPage.setPassword("");
@@ -13,23 +13,25 @@ public class LoginTest {
     }
 
     @Test
-    public void testLoginToSalesforce() {
+    public void testLoginToSalesforce_TC02() {
         LoginPage loginPage = new LoginPage();
-        loginPage.login();
+        HomePage homePage = loginPage.login();
+        // code for wait.
+        assertTrue(homePage.isUserNavButtonVisible());
     }
 
     @Test
-    public void testRememberMe() {
+    public void testRememberMe_TC03() {
 
     }
 
     @Test
-    public void testForgotPassword() {
+    public void testForgotPassword_TC04A() {
 
     }
 
     @Test
-    public void testForgotPasswordErrorMessage() {
+    public void testForgotPasswordErrorMessage_TC04B() {
 
     }
 }
