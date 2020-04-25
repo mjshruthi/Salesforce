@@ -2,7 +2,6 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertTrue;
 
 public class LoginTest {
-
     @Test
     public void testLoginErrorMessage_TC01() throws InterruptedException{
         LoginPage loginPage = new LoginPage();
