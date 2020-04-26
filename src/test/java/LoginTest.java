@@ -24,7 +24,14 @@ public class LoginTest {
 
     @Test
     public void testRememberMe_TC03() {
-
+        LoginPage loginPage = new LoginPage();
+        loginPage.setRememberMe();
+        HomePage homePage = loginPage.login();
+        homePage.isUserNavButtonVisible();
+        loginPage = homePage.clickLogout();
+        loginPage.isUserNamePopulated();
+        loginPage.isRememberMeSelected();
+        loginPage.quit();
     }
 
     @Test
