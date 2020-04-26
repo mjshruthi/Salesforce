@@ -81,7 +81,7 @@ public class HomePage {
         driver.quit();
     }
 
-    private void waitFor(By element){
+    private void waitFor(By element) {
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(element)));
     }
 }

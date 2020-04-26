@@ -12,6 +12,7 @@ import java.util.Properties;
 
 public class LoginPage {
     private static final By REMEMBER_ME = By.xpath("//*[@id='rememberUn']");
+    private static final By FORGOT_PWD = By.xpath("//*[@id='forgot_password_link']");
     private static WebDriver driver;
     private WebDriverWait wait;
 
@@ -107,6 +108,16 @@ public class LoginPage {
     public boolean isRememberMeVisible() {
         waitFor(REMEMBER_ME);
         return true;
+    }
+
+    public boolean isForgotPwdVisible() {
+        waitFor(FORGOT_PWD);
+        return true;
+    }
+
+    public ForgotPwdPage clickForgotPwdButton() {
+        driver.findElement(FORGOT_PWD).click();
+        return new ForgotPwdPage(driver);
     }
 
     private void readProperties() {
