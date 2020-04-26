@@ -21,7 +21,7 @@ public class LoginPage {
         wait = new WebDriverWait(driver, 30);
     }
 
-    public LoginPage(WebDriver driver){
+    public LoginPage(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, 30);
     }
@@ -79,27 +79,28 @@ public class LoginPage {
     }
 
     public String getLoginErrorMessage() {
+        waitFor(By.xpath("//*[@id='error']"));
         String errorMsg = driver.findElement(By.xpath("//*[@id='error']")).getText();
         return errorMsg;
     }
 
-    public void setRememberMe(){
+    public void setRememberMe() {
         waitFor(REMEMBER_ME);
         driver.findElement(REMEMBER_ME).click();
     }
 
-    public boolean isRememberMeSelected(){
-        waitFor(By.xpath("//input[@id='username']"));
+    public boolean isRememberMeSelected() {
         boolean remembermeSelected = driver.findElement(REMEMBER_ME).isSelected();
         return remembermeSelected;
     }
 
-    public boolean isUserNamePopulated(){
-        boolean userNamePopulated = driver.findElement(By.xpath("//input[@id='username']")).getText().equals(System.getProperty("username"));
+    public boolean isUserNamePopulated() {
+        boolean userNamePopulated = driver.findElement(By.xpath("//*[@id='idcard-identity']"))
+                .getText().equals(System.getProperty("username"));
         return userNamePopulated;
     }
 
-    private void waitFor(By element){
+    private void waitFor(By element) {
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(element)));
     }
 
@@ -120,7 +121,7 @@ public class LoginPage {
         }
     }
 
-    public void quit(){
+    public void quit() {
         driver.quit();
     }
 
