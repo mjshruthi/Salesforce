@@ -13,7 +13,11 @@ public class HomePage {
     private static final By USER_NAV_LIGHTNING_EXP = By.xpath("//a[@title='Switch to Lightning Experience']");
     private static final By USER_NAV_LOGOUT = By.xpath("//a[@title='Logout']");
 
-    private static final By CRITICAL_UPDATE_CANCEL_BUTTON = By.xpath("//*[@id='cruc_notifyX']");
+    private static final By ACCOUNTS_TAB = By.xpath("//li[@id='Account_Tab']");
+    private static final By OPPORTUNITIES_TAB = By.xpath("//li[@id='Opportunity_Tab']");
+    private static final By LEADS_TAB = By.xpath("//li[@id='Lead_Tab']");
+    private static final By CONTACTS_TAB = By.xpath("//li[@id='Contact_Tab']");
+
     private static WebDriver driver;
     private WebDriverWait wait;
 
@@ -83,5 +87,29 @@ public class HomePage {
 
     private void waitFor(By element) {
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(element)));
+    }
+
+    public AccountsPage clickAccountsTab() {
+        waitFor(ACCOUNTS_TAB);
+        driver.findElement(ACCOUNTS_TAB).click();
+        return new AccountsPage(driver);
+    }
+
+    public ContactsPage clickContactsTab() {
+        waitFor(CONTACTS_TAB);
+        driver.findElement(CONTACTS_TAB).click();
+        return new ContactsPage(driver);
+    }
+
+    public OpportunitiesPage clickOpportunitiesTab() {
+        waitFor(OPPORTUNITIES_TAB);
+        driver.findElement(OPPORTUNITIES_TAB).click();
+        return new OpportunitiesPage(driver);
+    }
+
+    public LeadsPage clickLeadsTab() {
+        waitFor(LEADS_TAB);
+        driver.findElement(LEADS_TAB).click();
+        return new LeadsPage(driver);
     }
 }
