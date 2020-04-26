@@ -1,9 +1,10 @@
 import org.testng.annotations.Test;
+
 import static org.testng.Assert.assertTrue;
 
 public class LoginTest {
     @Test
-    public void testLoginErrorMessage_TC01() throws InterruptedException{
+    public void testLoginErrorMessage_TC01() throws InterruptedException {
         LoginPage loginPage = new LoginPage();
         loginPage.setUserName("mjshruthi");
         loginPage.setPassword("");
@@ -36,11 +37,24 @@ public class LoginTest {
 
     @Test
     public void testForgotPassword_TC04A() {
-
+        LoginPage loginPage = new LoginPage();
+        loginPage.isForgotPwdVisible();
+        ForgotPwdPage forgotPwdPage = loginPage.clickForgotPwdButton();
+        forgotPwdPage.enterUserName();
+        forgotPwdPage.clickContinue();
+        forgotPwdPage.isCheckEmailVisible();
+        forgotPwdPage.quit();
     }
 
     @Test
     public void testForgotPasswordErrorMessage_TC04B() {
+        LoginPage loginPage = new LoginPage();
+        loginPage.setUserName("123");
+        loginPage.setPassword("22131");
+        loginPage.clickLoginButton();
+        assertTrue(loginPage.getLoginErrorMessage().equalsIgnoreCase("Please check your username and password. If you still can't log in, contact your Salesforce administrator."),
+                "Error on screen did not match expected message.");
+        loginPage.quit();
 
     }
 }
