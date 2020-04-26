@@ -91,4 +91,9 @@ public class LoginPage {
             System.out.println(a);
         }
     }
+
+    public void quit(){
+        driver.quit();
+    }
+
 }
