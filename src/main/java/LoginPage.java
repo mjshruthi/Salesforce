@@ -77,6 +77,9 @@ public class LoginPage {
         return errorMsg;
     }
 
+    public void setRememberMe(){
+        driver.findElement(By.xpath("//input[@id='rememberUn']"));
+    }
     private void readProperties() {
         String propertiesPath = System.getProperty("user.dir") + "/testData.properties";
         try {
