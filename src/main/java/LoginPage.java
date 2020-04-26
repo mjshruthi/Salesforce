@@ -11,12 +11,18 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 public class LoginPage {
+    private static final By REMEMBER_ME = By.xpath("//*[@id='rememberUn']");
     private static WebDriver driver;
     private WebDriverWait wait;
 
     public LoginPage() {
         readProperties();
         launchBrowser(System.getProperty("browser"));
+        wait = new WebDriverWait(driver, 30);
+    }
+
+    public LoginPage(WebDriver driver) {
+        this.driver = driver;
         wait = new WebDriverWait(driver, 30);
     }
 
@@ -73,8 +79,34 @@ public class LoginPage {
     }
 
     public String getLoginErrorMessage() {
+        waitFor(By.xpath("//*[@id='error']"));
         String errorMsg = driver.findElement(By.xpath("//*[@id='error']")).getText();
         return errorMsg;
+    }
+
+    public void setRememberMe() {
+        waitFor(REMEMBER_ME);
+        driver.findElement(REMEMBER_ME).click();
+    }
+
+    public boolean isRememberMeSelected() {
+        boolean remembermeSelected = driver.findElement(REMEMBER_ME).isSelected();
+        return remembermeSelected;
+    }
+
+    public boolean isUserNamePopulated() {
+        boolean userNamePopulated = driver.findElement(By.xpath("//*[@id='idcard-identity']"))
+                .getText().equals(System.getProperty("username"));
+        return userNamePopulated;
+    }
+
+    private void waitFor(By element) {
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(element)));
+    }
+
+    public boolean isRememberMeVisible() {
+        waitFor(REMEMBER_ME);
+        return true;
     }
 
     private void readProperties() {
@@ -89,7 +121,7 @@ public class LoginPage {
         }
     }
 
-    public void quit(){
+    public void quit() {
         driver.quit();
     }
 
