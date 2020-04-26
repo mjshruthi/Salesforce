@@ -50,10 +50,12 @@ public class HomePage {
         driver.findElement(USER_NAV_LIGHTNING_EXP).click();
     }
 
-    public void clickLogout() {
+    public LoginPage clickLogout(){
         waitFor(USER_NAV);
         clickUserMenu();
         driver.findElement(USER_NAV_LOGOUT).click();
+        LoginPage loginPage = new LoginPage(driver);
+        return loginPage;
     }
 
     public void verifyMenuItems() {

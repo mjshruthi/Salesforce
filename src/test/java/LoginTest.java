@@ -27,7 +27,12 @@ public class LoginTest {
         LoginPage loginPage = new LoginPage();
         loginPage.setRememberMe();
         HomePage homePage = loginPage.login();
-
+        homePage.isUserNavButtonVisible();
+        loginPage = homePage.clickLogout();
+        loginPage.setRememberMe();
+//        loginPage.isRememberMeVisible();
+        loginPage.isUserNamePopulated();
+        loginPage.isRememberMeSelected();
     }
 
     @Test
