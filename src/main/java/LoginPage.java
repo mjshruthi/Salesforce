@@ -136,5 +136,4 @@ public class LoginPage {
     public void quit() {
         driver.quit();
     }
-
 }
