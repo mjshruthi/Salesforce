@@ -1,6 +1,8 @@
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import static org.testng.Assert.assertTrue;
 
 public class UserMenuTest {
 
@@ -22,6 +24,18 @@ public class UserMenuTest {
     @Test
     public void testSelectMyProfile_TC06() {
         homePage.clickUserMenuMyProfile();
+        homePage.clickContact();
+        homePage.getPopup();
+        homePage.clickAbout();
+        homePage.clickLastName();
+        homePage.editLastName();
+        homePage.clickSaveAll();
+        Assert.assertTrue(homePage.verifyLastNameChange(), "Last Name has not changed.");
+        homePage.clickPost();
+        String postData = " some data - " + Math.round(Math.random()*1000);
+        homePage.enterTextToPost();
+        homePage.clickShare();
+        homePage.verifyPostedText();
     }
 
     @Test
