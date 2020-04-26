@@ -13,7 +13,6 @@ import java.util.Properties;
 public class LoginPage {
     private static final By REMEMBER_ME = By.xpath("//*[@id='rememberUn']");
     private static final By FORGOT_PWD = By.xpath("//*[@id='forgot_password_link']");
-
     private static WebDriver driver;
     private WebDriverWait wait;
 
