@@ -6,7 +6,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class OpportunityEditPage {
     private static final By SAVE_BUTTON = By.xpath("//*[@id=\"topButtonRow\"]/input[1]");
@@ -17,7 +16,7 @@ public class OpportunityEditPage {
     private static final By CLOSE_DATE = By.xpath("//*[@id=\"opp9\"]");
     private static final By CLOSE_DATE_TODAY = By.xpath("//*[@id=\"datePicker\"]/div[2]/div/a");
     private static final By STAGE_QUALIFICATION = By.xpath("//*[@id=\"opp11\"]/option[2]");
-    private static final By PROBABLITY = By.xpath("//*[@id=\"opp12\"]");
+    private static final By PROBABILITY = By.xpath("//*[@id=\"opp12\"]");
 
     private static WebDriver driver;
     private WebDriverWait wait;
@@ -73,9 +72,9 @@ public class OpportunityEditPage {
     }
 
     public void setProbablity(int probablity) {
-        waitFor(PROBABLITY);
-        driver.findElement(PROBABLITY).clear();
-        driver.findElement(PROBABLITY).sendKeys(String.valueOf(probablity));
+        waitFor(PROBABILITY);
+        driver.findElement(PROBABILITY).clear();
+        driver.findElement(PROBABILITY).sendKeys(String.valueOf(probablity));
     }
 
     private void threadSleep(long millis) {
