@@ -58,11 +58,20 @@ public class LoginPage {
         //driver.switchTo().frame(driver.findElement(By.xpath("//a[@id='tryLexDialogX'][@title='Close']")));
         //WebElement ft=driver.findElement(By.xpath("//a[@class='button secondary']"),"TryForFree"));
         //clickButton(ft,"TryForFree");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+            // ignore.
+        }
+
 
         WebElement popup = driver.findElement(By.xpath("//*[@id='tryLexDialogX'][@title='Close']"));
         if (popup.isDisplayed()) {
             popup.click();
         }
+ /*       else{
+            return new HomePage(driver);
+        }*/
 
         return new HomePage(driver);
     }

@@ -49,9 +49,17 @@ public class HomePage {
     }
 
     public void clickUserMenuDevConsole() {
+        //String parent = driver.getWindowHandle();
         waitFor(USER_NAV);
         clickUserMenu();
         driver.findElement(USER_NAV_DEV_CONSOLE).click();
+        ArrayList<String> windowTabs = new ArrayList(driver.getWindowHandles());
+        System.out.println(windowTabs.size());
+        if (windowTabs.size() > 1) {
+            driver.switchTo().window(windowTabs.get(1));
+            driver.close();
+        }
+        driver.switchTo().window(windowTabs.get(0));
     }
 
     public void clickContact() {
@@ -61,7 +69,7 @@ public class HomePage {
     }
 
     public void getPopup() {
-        String parent=driver.getWindowHandle();
+        //String parent=driver.getWindowHandle();
         WebElement popup = driver.findElement(By.xpath("//h2[@id='contactInfoTitle']"));
         if (popup.isDisplayed()) {
             popup.click();
@@ -73,7 +81,7 @@ public class HomePage {
     }
 
 
-    public void clickAbout(){
+    public void clickAbout() {
         WebElement iFrame = driver.findElement(By.xpath("//iframe[@id='contactInfoContentId']"));
         driver.switchTo().frame(iFrame);
         System.out.println("Switched to iframe");
@@ -86,29 +94,29 @@ public class HomePage {
         driver.findElement(ABOUT_TAB).click();
     }
 
-    public void clickLastName(){
+    public void clickLastName() {
         waitFor(LAST_NAME);
         driver.findElement(LAST_NAME).click();
     }
 
-    public void editLastName(){
+    public void editLastName() {
         driver.findElement(LAST_NAME).clear();
         driver.findElement(LAST_NAME).sendKeys("test");
     }
 
-    public void clickSaveAll(){
+    public void clickSaveAll() {
         driver.findElement(By.xpath("//*[@id='TabPanel']/div/div[2]/form/div/input[1]")).click();
         driver.switchTo().defaultContent();
     }
 
-    public boolean verifyLastNameChange(){
+    public boolean verifyLastNameChange() {
         waitFor(USER_NAV);
         System.out.println(driver.findElement(By.xpath("//*[@id=\"tailBreadcrumbNode\"]")).getText());
         String editedLastName = driver.findElement(By.xpath("//*[@id=\"tailBreadcrumbNode\"]")).getText();
         return editedLastName.equalsIgnoreCase("4lx6mj8mol6l test ");
     }
 
-    public void clickPost(){
+    public void clickPost() {
         waitFor(POST);
         driver.findElement(POST).click();
         try {
@@ -118,7 +126,7 @@ public class HomePage {
         }
     }
 
-    public void enterTextToPost(){
+    public void enterTextToPost() {
         WebElement iFrame = driver.findElement(By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']"));
         driver.switchTo().frame(iFrame);
         System.out.println("Switched to iframe for Post.");
@@ -131,10 +139,11 @@ public class HomePage {
         //driver.findElement(By.xpath("//textarea[@id='publishereditablearea']")).sendKeys("Test Post");
     }
 
-    public void clickShare(){
+    public void clickShare() {
         driver.findElement(By.xpath("//*[@id='publishersharebutton']")).click(); // //*[@id="publishersharebutton"]
     }
-    public void verifyPostedText(){
+
+    public void verifyPostedText() {
         String postData = "let me post this data.";
         driver.findElement(By.xpath("//*[@id=\"publishersharebutton\"]")).click();
         driver.findElement(By.xpath("//*[@id=\"feedwrapper\"]//p[contains(text(),postData)]"));
