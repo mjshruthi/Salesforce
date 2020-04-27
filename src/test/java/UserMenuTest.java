@@ -27,9 +27,11 @@ public class UserMenuTest {
         homePage.getPopup();
         homePage.clickAbout();
         homePage.clickLastName();
-        homePage.editLastName();
+        String changeLastNameTo = "Abcd";
+        homePage.editLastName("changeLastNameTo");
         homePage.clickSaveAll();
-        Assert.assertTrue(homePage.verifyLastNameChange(), "Last Name has not changed.");
+        String verifyFNameLName = "4lx6mj8mol6l"+changeLastNameTo;
+        Assert.assertTrue(homePage.verifyLastNameChange(verifyFNameLName), "Last Name has not changed.");
         homePage.clickPost();
         String postData = " some data - " + Math.round(Math.random()*1000);
         homePage.enterTextToPost();
