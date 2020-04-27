@@ -16,7 +16,7 @@ public class LeadsTest {
 
     @Test
     public void testLeadsTab_TC20() {
-        leadsPage.verifyOnLeadsHome();
+        assertTrue(leadsPage.verifyLeadsHome().equals("Leads: Home ~ Salesforce - Essentials Edition"));
     }
 
     @Test
@@ -26,7 +26,7 @@ public class LeadsTest {
 
     @Test
     public void testLeadsDefaultView_TC22() {
-        leadsPage.verifyOnLeadsHome();
+        assertTrue(leadsPage.verifyLeadsHome().equals("Leads: Home ~ Salesforce - Essentials Edition"));
         leadsPage.clickDropDownANDselectTodaysLead();
         assertTrue(leadsPage.verifyDropDownItemSelected().equals("Today's Leads"));
         leadsPage.clickDropDownANDselectMyUnreadLeads();
@@ -40,12 +40,20 @@ public class LeadsTest {
 
     @Test
     public void testLeadsTodaysLeads_TC23() {
-
+        assertTrue(leadsPage.verifyLeadsHome().equals("Leads: Home ~ Salesforce - Essentials Edition"));
+        leadsPage.clickDropDownANDselectTodaysLead();//do click drop down and select in one flow to reduce errors.
+        assertTrue(leadsPage.verifyDropDownItemSelected().equals("Today's Leads"));
     }
 
     @Test
     public void testLeadsNewButton_TC24() {
-
+        assertTrue(leadsPage.verifyLeadsHome().equals("Leads: Home ~ Salesforce - Essentials Edition"));
+        //assertTrue(leadsPage.verifyNewLeadPage().equals("Lead Edit: New Lead ~ Salesforce - Essentials Edition"));
+        String lName = "TestLastname"+ Math.round(Math.random() * 100);
+        String cName = "CompanyXY" + Math.round(Math.random() * 100);
+        leadsPage.clickNew(lName, cName);
+        String lastTestName = leadsPage.clickSave();
+        assertTrue(lastTestName.equals(lName), "Lastname displayed is different.");
     }
 
 

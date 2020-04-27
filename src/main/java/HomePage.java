@@ -1,8 +1,13 @@
+import org.junit.rules.ExpectedException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.ArrayList;
+
+import static org.testng.Assert.assertTrue;
 
 public class HomePage {
 
@@ -16,6 +21,9 @@ public class HomePage {
     private static final By ABOUT_TAB = By.id("aboutTab");
     private static final By LAST_NAME = By.xpath("//*[@id=\"lastName\"]");
     private static final By POST = By.xpath("//span[contains(@class,'publisherattachtext')][contains(text(),'Post')]");
+    private static final By VERIFY_NAME = By.xpath("//span[@class='menuButtonLabel'][contains(text(),'4lx6mj8mol6l opayQ')]");
+    private static final By NAME_LINK = By.xpath("//h1[contains(@class,'currentStatusUserName')]//a[contains(text(),'4lx6mj8mol6l opayQ')]");
+    private static final By NAME_PROFILEPAGE = By.xpath("//*[@id=\"tailBreadcrumbNode\"]");
     private static final By CRITICAL_UPDATE_CANCEL_BUTTON = By.xpath("//*[@id='cruc_notifyX']");
 
     private static final By ACCOUNTS_TAB = By.xpath("//li[@id='Account_Tab']");
@@ -99,9 +107,9 @@ public class HomePage {
         driver.findElement(LAST_NAME).click();
     }
 
-    public void editLastName() {
+    public void editLastName(String lastName) {
         driver.findElement(LAST_NAME).clear();
-        driver.findElement(LAST_NAME).sendKeys("test");
+        driver.findElement(LAST_NAME).sendKeys(lastName);
     }
 
     public void clickSaveAll() {
@@ -109,11 +117,11 @@ public class HomePage {
         driver.switchTo().defaultContent();
     }
 
-    public boolean verifyLastNameChange() {
+    public boolean verifyLastNameChange(String lname) {
         waitFor(USER_NAV);
         System.out.println(driver.findElement(By.xpath("//*[@id=\"tailBreadcrumbNode\"]")).getText());
         String editedLastName = driver.findElement(By.xpath("//*[@id=\"tailBreadcrumbNode\"]")).getText();
-        return editedLastName.equalsIgnoreCase("4lx6mj8mol6l test ");
+        return editedLastName.equalsIgnoreCase("4lx6mj8mol6l "+lname);
     }
 
     public void clickPost() {
@@ -182,6 +190,37 @@ public class HomePage {
         return true;
     }
 
+    public String verifyHomePageTitle(){
+        return driver.getTitle();
+    }
+
+    public String verifyProfilePageTitle(){
+        return driver.getTitle();
+    }
+
+    public String verifyFirstNameLastNameonDropDown(){
+        return driver.findElement(VERIFY_NAME).getText();
+    }
+
+    public void clickNameLink(){
+        driver.findElement(NAME_LINK).click();
+    }
+
+    public String verifyNameOnProfilePage(){
+        return driver.findElement(NAME_PROFILEPAGE).getText();
+    }
+
+    public void revertNameChange(){
+        clickUserMenuMyProfile();
+        clickContact();
+        getPopup();
+        clickAbout();
+        clickLastName();
+        String changeLastNameTo = "opayQ";
+        editLastName(changeLastNameTo);
+        clickSaveAll();
+        assertTrue(verifyProfilePageTitle().equalsIgnoreCase("User: 4lx6mj8mol6l opayQ ~ Salesforce - Essentials Edition"), "Profile Page title doesn't match.");
+    }
     public void quit() {
         driver.quit();
     }
