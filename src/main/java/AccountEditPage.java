@@ -47,6 +47,7 @@ public class AccountEditPage {
         waitFor(SAVE_BUTTON);
         driver.findElement(SAVE_BUTTON).click();
     }
+
     public boolean isAccountCreated(String accountName) {
         waitFor(NEW_ACCOUNT_NAME);
         String newAccountName = driver.findElement(NEW_ACCOUNT_NAME).getText();
