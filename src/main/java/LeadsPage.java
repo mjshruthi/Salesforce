@@ -22,7 +22,6 @@ public class LeadsPage {
     private static final By SAVE_BUTTON = By.xpath("//*[@id=\"bottomButtonRow\"]/input[1]");
     private static final By NEWLEAD_LASTNAME = By.xpath("//h2[contains(@class,'topName')]");
 
-
     private static WebDriver driver;
     private WebDriverWait wait;
 
